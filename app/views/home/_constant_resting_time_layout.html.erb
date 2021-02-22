@@ -1,0 +1,18 @@
+<div class="middle-container">
+  <div align="center">
+    <div id='progressbar1'></div>
+    <div id='question_countdown_timer' value="25"></div>
+  </div>
+  <div>
+    <div align="center">
+      <p>You have successfully completed a set of tasks, please wait for a while for the new set of task!</p>
+    </div>
+    </div>
+</div>
+<div class="img" align="center">
+  <img src="/assets/new_image.gif" class="img-responsive gif_img" alt="Responsive image">
+  <%= form_tag({:controller => "home", :action => "create_user_answers"}, :id => 'my-form') do %>
+    <%= hidden_field_tag :static_form, false%>
+    <%= submit_tag "Next", :class=>"btn btn-info hide" %>
+  <% end%>
+</div>

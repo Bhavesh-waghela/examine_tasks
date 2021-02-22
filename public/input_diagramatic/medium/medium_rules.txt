@@ -1,0 +1,8 @@
+<b>AA</b> Replace the third letter with the number 3.<br>
+<b>CC</b> Replace the last letter with the previous one in the alphabet.<br>
+<b>GG</b> Switch the second and fifth letters.<br>
+<b>II</b> Replace the third item with the number 7.<br>
+<b>KK</b> Replace the first number with the letter Z.<br>
+<b>MM</b> Replace the first letter with the number 9.<br>
+<b>OO</b> Replace the fourth item with the letters WR.<br>
+<b>PP</b> Reverse the whole set of sequence.<br>

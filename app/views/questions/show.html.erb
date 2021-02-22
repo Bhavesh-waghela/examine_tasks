@@ -1,0 +1,55 @@
+<div id='progressbar1'></div>
+<div id='question_countdown_timer' value="<%= @question.countdown_timer %>"></div>
+<div> Timer : <%= @question.countdown_timer %> secs</div>
+<div id="testContainer" style="visibility: visible;">
+    <div id="testContainerInner">
+        <div id="questionContainerHolder">
+            <div id="questionContainer" style="height: 130px;">
+                <div id="qTextHolder" style="text-align:center;font-size:1.2em;"><%= @question.question.html_safe%></div>
+            </div>
+        </div>
+    </div>
+    <%= form_tag(:controller => "home", :action => "create_user_answers",  :id => 'my-form', :remote => true) do %>
+      <div id="answerContainer" style="display: table;">
+        <div class="col-md-12 col-md-offset-4">
+          <% @question.options.each do |option| %>
+            <div class="col-md-12">
+              <%= hidden_field_tag 'question_id', @question.id%>
+              <%= radio_button_tag 'option', option.option %>
+              <%= option.option%>
+            </div>
+        <% end %>
+        </div>
+      </div>
+      <div class="nextButton naviBut" style="display: inline; visibility: visible;"> 
+        <div id="next_page_url" value="<%= @next_path %>"></div>
+        <%= submit_tag "Begin", :class=>"normalButton normalGreenButton centerMe", :id=>"beginButtonToRemove" %>
+      </div>
+    <% end %>  
+</div>
+<script>
+  function createProgressbar(id, duration, callback) {
+    var progressbar = document.getElementById(id);
+    progressbar.className = 'progressbar';
+    var progressbarinner = document.createElement('div');
+    progressbarinner.className = 'inner';
+
+    progressbarinner.style.animationDuration = duration;
+    if (typeof(callback) === 'function') {
+      progressbarinner.addEventListener('animationend', callback);
+    }
+
+    progressbar.appendChild(progressbarinner);
+      progressbarinner.style.animationPlayState = 'running';
+    }
+
+    addEventListener('load', function() {
+      countdown_timer = document.getElementById('question_countdown_timer').getAttribute('value');
+      createProgressbar('progressbar1', countdown_timer+'s', function() {
+        //next_page_url = document.getElementById('next_page_url').getAttribute('value');
+        document.getElementById('my-form').submit():
+        console.log("...")
+        //window.location.replace(next_page_url);
+      });
+    });
+</script>

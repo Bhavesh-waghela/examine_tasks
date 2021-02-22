@@ -1,0 +1,90 @@
+<div class="middle-container" style="margin-top: 50px;">
+  <div align="center">
+    <div id='progressbar1'></div>
+    <div id='question_countdown_timer' value="<%= @question.countdown_timer %>"></div>
+  </div>
+  <% if @question.sternberg_timer.present? %>
+    <div id='sternberg_timer' value="<%= @question.sternberg_timer %>"></div>
+  <% end %>
+  <div align="center">
+    <p>Timer : <%= @question.countdown_timer.to_i %> secs</p>
+  </div>
+  <div>
+    <% if @question.description.present? %>
+      <div class="row justify-content-md-center" style="margin: 10px;">
+        <div class="col-md-8">
+          <b><%= @question.description.html_safe%></b>
+        </div>  
+      </div>
+    <% end %>
+    <% if @question.input_rules.present? %>
+      <div class="row justify-content-md-center">
+        <div class="col-sm-8">
+          <%= @question.input_rules.html_safe%>
+        </div>
+      </div>
+    <% end %>
+    <% if @question.q_type == "STENBERG" && !@question.is_tlx%>
+      <div align="center" style="margin: 10px;">
+        <span id="timer"><%= @question.sternberg_timer %><span>
+      </div>
+    <% end %>  
+    <% if @question.question.present? %>
+      <div id="show_list_of_ques container" class="question_bank" align="center" style="margin: 30px;">
+        <% if @question.q_type == "STENBERG" && !@question.is_tlx%>
+          <% arr = @question.question.split(" ") %>
+            <div class="row justify-content-md-center">
+              <div class="col-md-5">
+                <div class="row">
+                  <% arr.each do |words| %>
+                    <div class="col-md-2 offset-md-1">
+                      <h4><%= words.html_safe %></h4>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+        <% else %>
+          <h4><%= @question.question.html_safe%></h4>
+        <% end %>
+      </div>  
+    <%end%>
+    <% if @question.image.present? %>
+      <div align="center" style="margin: 10px;">
+        <%= image_tag @question.image, :class => "question_img" %>
+      </div>
+    <%end%>  
+  </div>
+</div>
+
+<%= form_tag({:controller => "home", :action => "create_user_answers"}, :id => 'my-form') do %>
+  <%= hidden_field_tag 'question_id', @question.id%>
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <% random_options = (@question.q_type == "INPUT_DIAGRAMMATIC" && !@question.is_tlx) ? @question.options.shuffle : @question.options %>
+      <% random_options.each do |option| %>
+        <% if @question.q_type == "STENBERG" && !@question.is_tlx %>
+          <div class="col-sm-2 hide_questions hide">
+            <%= hidden_field_tag 'is_stenberg_task', true %>
+            <%= check_box_tag 'option[]', option.option, false %>
+            <%= option.option %>
+          </div>  
+        <% else %>
+          <% class_col = (@question.is_tlx ) ? "col-sm-4" : "col-sm-2"%>
+          <div class="<%= class_col%>">
+            <div class="row">
+              <div class="col-xs-12">
+                <%= hidden_field_tag 'is_stenberg_task', false %>
+                <%= radio_button_tag 'option', option.option %>
+                <%= option.option%>
+              </div>
+            </div>
+          </div>  
+        <% end %>
+      <%end%>
+    </div>
+  </div>
+  <div align="center" >
+    <%= submit_tag "Next", :class=>"btn btn-info" %>
+  </div>
+<% end %>

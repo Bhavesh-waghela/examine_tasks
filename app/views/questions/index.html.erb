@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Questions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sr. No</th>
+      <th>Question</th>
+      <th>Difficulty level</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% count = 1%>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= count %></td>
+        <td><%= question.question.html_safe %></td>
+        <td><%= question.difficulty_level %></td>
+      </tr>
+      <% count += 1%>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

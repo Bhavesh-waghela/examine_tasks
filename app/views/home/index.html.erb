@@ -1,0 +1,25 @@
+<div class="middle-container" style="margin-top: 130px;">
+  <div>
+    <div align="center">
+      <h1>Introduction</h1>
+    </div>
+    <div>
+      <div align="center">
+        <p>This test consists of 3 different types of tasks, you have 60 minutes to complete the task.
+        <br><br> Each task have different set of difficulty levels and number of questions within them, please follow the rules and instructions provided to each set of questions.
+        <br><br>The test should be taken <b>without</b> the aid of a calculator. However, the use of pen and paper is encouraged.<br><br>When you are ready, click 'Begin' to start the test.</p>
+      </div>
+    </div>
+    <div>
+      <div align="center">
+        <%= form_tag(:controller => "home", :action => "begin_test") do %>
+          <div class="form-group">
+            <%= label_tag :name %>  
+            <%= text_field_tag :name, '', :placeholder => "Enter your first name", :class => "form-control", :style=> "width: 13%;" %>
+            <%= submit_tag "Begin", :class=>"btn btn-primary", :style => "margin: 25px"%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

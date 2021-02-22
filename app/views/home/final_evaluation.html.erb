@@ -1,0 +1,21 @@
+<div class="middle-container" style="margin-top: 50px;">
+  <div>
+    <div align="center">
+      <h1>Congratulations!</h1>
+    </div>
+    <div>
+      <div align="center">
+        <p>Thank you for performing the task, you've scored <%= 85 %>%.
+        </b>Below is your results, thank you for partcipating.</p>
+      </div>
+      <div align="center">
+        <%= pie_chart Question.group(:difficulty_level).count %>
+      </div>
+    </div>
+    <div>
+      <div align="center" style="margin-top: 20px;">
+        <%= link_to "End Test", generate_users_xlsx_file_path, :class=> "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>

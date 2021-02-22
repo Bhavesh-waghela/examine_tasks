@@ -1,0 +1,7 @@
+<% if params[:question_id] == "resting_time" %>
+  <%= render :partial => "home/resting_time_layout"%>
+<% elsif params[:question_id] == "constant_time"%>
+  <%= render :partial => "home/constant_resting_time_layout"%>
+<% else %>
+  <%= render :partial => "home/questions", question: @question%>
+<% end %>

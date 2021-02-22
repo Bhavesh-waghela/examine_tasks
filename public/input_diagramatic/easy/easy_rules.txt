@@ -1,0 +1,5 @@
+<b>AB</b> Delete the last letter.<br>
+<b>BC</b> Replace the fourth letter with the next in the alphabet.<br>
+<b>CD</b> Insert the letter P between the third and fourth characters.<br>
+<b>DE</b> Exchange the first and last characters.<br>
+<b>EF</b> Replace the second character with the previous letter in the alphabet.<br>

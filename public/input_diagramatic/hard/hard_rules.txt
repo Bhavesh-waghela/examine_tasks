@@ -1,0 +1,12 @@
+<b>AA</b> Replace the sixth item with 19th Uppercase alphabet.<br>
+<b>BB</b> If the third letter in the sequence precedes(coming before) the letter 'K' or 'k' in the alphabet replace it with the number 7 otherwise replace it with the letter P.<br>
+<b>CC</b> Switch the 1st letter with last number in the sequence.<br>
+<b>DD</b> Replace the fifth letter with the number 7.<br>
+<b>EE</b> Insert the letter P between the third and fourth items.<br>
+<b>FF</b> Replace the first letter with the number 9.<br>
+<b>GG</b> Reverse the whole sequence of items.<br>
+<b>HH</b> If the first number is larger than 5 then subtract it from 2 otherwise add 3 to it.<br>
+<b>II</b> Exchange the second and sixth items in the sequence.<br>
+<b>JJ</b> Change the first letter to uppercase letter if its lowercase or change the first letter to lowercase
+letter if its uppercase.<br>
+<b>KK</b> Replace the fourth lower-case letter with the next(lower case) in the alphabet.<br>
