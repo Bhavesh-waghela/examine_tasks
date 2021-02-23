@@ -46,7 +46,12 @@ input[type=radio] {
 
 .question_img{
   width:45%;
-  height: 330px;
+  height: 390px;
+}
+
+.small_question_img{
+  width:500px;
+  height: 500px;
 }
 
 .hide {

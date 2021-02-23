@@ -5,11 +5,11 @@
     </div>
     <div>
       <div align="center">
-        <p>Thank you for performing the task, you've scored <%= 85 %>%.
+        <p>Thank you for performing the task, you've scored <%= @total_percent_val.ceil(2) %>%.
         </b>Below is your results, thank you for partcipating.</p>
       </div>
       <div align="center">
-        <%= pie_chart Question.group(:difficulty_level).count %>
+        <%= pie_chart [['Correct answers', @correct_answers_count], ['Wrong answers', @wrong_answers_count], ['Unanswered', @unaswered_count]] %>
       </div>
     </div>
     <div>

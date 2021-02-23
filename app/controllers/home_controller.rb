@@ -2,6 +2,8 @@ class HomeController < ApplicationController
   before_action :set_question, only: %i[ show_question]
 
   def index
+    #@current_user = User.find_by_username("P2")
+    #render "/home/final_evaluation.xlsx.axlsx"
   end
 
   def begin_test
@@ -15,8 +17,13 @@ class HomeController < ApplicationController
 
   def create_user_answers
     unless params[:static_form]
-      @answers = current_user.answers.find_or_create_by!(:answer => params[:option], :question_id => params[:question_id])
-    end  
+      if params[:option].present? && params[:is_stenberg_task] == "true"
+        user_answer = params[:option].map(&:to_s).join(" ")
+      else
+        user_answer = params[:option]
+      end
+      @answers = current_user.answers.find_or_create_by!(:answer => user_answer, :question_id => params[:question_id])
+    end
     next_question_id = next_question
     if next_question_id == session[:set_of_questions].last
       next_path = final_evaluation_path
@@ -31,6 +38,23 @@ class HomeController < ApplicationController
 
   def final_evaluation
     @current_user = current_user
+    @total_count = []
+    @current_user.answers.each do |answer|
+      @total_count << answer.check_correct_answer[0] if !answer.question.is_tlx?
+    end
+    @correct_answers_count = 0
+    @wrong_answers_count = 0
+    @unaswered_count = 0
+    @total_count.each do |values|
+      if values == "yes"
+        @correct_answers_count += 1
+      elsif values == "no"
+        @wrong_answers_count += 1
+      else
+        @unaswered_count += 1  
+      end
+    end
+    @total_percent_val = @correct_answers_count.to_f/45.0*100.0
   end
 
   def generate_users_xlsx_file

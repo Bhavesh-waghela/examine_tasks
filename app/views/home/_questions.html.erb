@@ -1,4 +1,4 @@
-<div class="middle-container" style="margin-top: 50px;">
+<div class="middle-container" style="margin-top: 20px;">
   <div align="center">
     <div id='progressbar1'></div>
     <div id='question_countdown_timer' value="<%= @question.countdown_timer %>"></div>
@@ -34,10 +34,10 @@
         <% if @question.q_type == "STENBERG" && !@question.is_tlx%>
           <% arr = @question.question.split(" ") %>
             <div class="row justify-content-md-center">
-              <div class="col-md-5">
+              <div class="col-md-6">
                 <div class="row">
                   <% arr.each do |words| %>
-                    <div class="col-md-2 offset-md-1">
+                    <div class="col-md-4">
                       <h4><%= words.html_safe %></h4>
                     </div>
                   <% end %>
@@ -51,7 +51,8 @@
     <%end%>
     <% if @question.image.present? %>
       <div align="center" style="margin: 10px;">
-        <%= image_tag @question.image, :class => "question_img" %>
+        <% class_name = @question.difficulty_level == "HARD" ? "small_question_img" : "question_img"%>
+        <%= image_tag @question.image, :class => class_name %>
       </div>
     <%end%>  
   </div>
@@ -70,9 +71,9 @@
             <%= option.option %>
           </div>  
         <% else %>
-          <% class_col = (@question.is_tlx ) ? "col-sm-4" : "col-sm-2"%>
+          <% class_col = (@question.is_tlx ) ? "col-sm-4" : "col-sm-3"%>
           <div class="<%= class_col%>">
-            <div class="row">
+            <div class="row justify-content-md-center">
               <div class="col-xs-12">
                 <%= hidden_field_tag 'is_stenberg_task', false %>
                 <%= radio_button_tag 'option', option.option %>

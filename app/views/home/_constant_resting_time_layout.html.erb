@@ -1,11 +1,15 @@
 <div class="middle-container">
   <div align="center">
     <div id='progressbar1'></div>
-    <div id='question_countdown_timer' value="25"></div>
+    <div id='question_countdown_timer' value="20"></div>
   </div>
   <div>
     <div align="center">
-      <p>You have successfully completed a set of tasks, please wait for a while for the new set of task!</p>
+      <% if session[:next_ques_value].to_i == 0 %>
+        <p>The examination is about to start, so please stay focused and Best of luck for the exam!
+      <% else %>
+        <p>You have successfully completed a set of tasks, please wait for a while for the new set of task!</p>
+      <% end %>  
     </div>
     </div>
 </div>

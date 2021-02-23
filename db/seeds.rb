@@ -57,12 +57,13 @@ def generate_stenberg_questions(level, arr_name, max_options, question_value, c_
   end
 end
 
-def generate_raven_task_questions(level, timer, user)
-  [*1..10].each do |i|
+def generate_raven_task_questions(level, timer, user, set_of_ques, set_of_options, file_extension)
+  set_of_ques.each do |i|
     question = Question.create(:user_id => user.id, :description => "Please select the appropriate image for the given image which you think is the best match, there is only one possible solution so please look for all options carefully.", :q_type => Question.q_types["RAVEN"], :difficulty_level=> Question.difficulty_levels[level], :countdown_timer => timer)
-    question.image.attach(io: File.open("#{Rails.root}/public/raven/#{level.downcase}/#{i}.PNG"), filename: "#{i}.PNG")
-    ["A", "B", "C", "D", "E", "F"].each do |f_option|
-      Option.create(:question_id => question.id, :option => f_option, :correct_answer => (f_option == "A") ? true : false)
+    question.image.attach(io: File.open("#{Rails.root}/public/raven/#{level.downcase}/#{i}.#{file_extension}"), filename: "#{i}.PNG")
+    answers = CSV.read("#{Rails.root}/public/raven/#{level.downcase}/#{level.downcase}_ans.csv")
+    set_of_options.each do |f_option|
+      Option.create(:question_id => question.id, :option => f_option, :correct_answer => (f_option == answers[i][0]) ? true : false)
     end
   end
 end
@@ -82,15 +83,15 @@ end
 ["EASY", "MEDIUM", "HARD"].each do |level|
   if level == "EASY"
     generate_stenberg_questions(level, easy_questions, 5, 5, 25, 15, user)
-    generate_raven_task_questions(level, 25, user)
+    generate_raven_task_questions(level, 25, user, [*1..10], ["A", "B", "C", "D", "E", "F"], "PNG")
     generate_input_task_questions(level, 25, user)
   elsif level == "MEDIUM"
     generate_stenberg_questions(level, medium_questions, 10, 10, 45, 25, user)
-    generate_raven_task_questions(level, 45, user)
+    generate_raven_task_questions(level, 45, user, [*1..7], ["A", "B", "C", "D", "E", "F"], "PNG")
     generate_input_task_questions(level, 45, user)
   else
     generate_stenberg_questions(level, hard_questions, 15, 15, 60, 35, user)
-    generate_raven_task_questions(level, 60, user)
+    generate_raven_task_questions(level, 60, user, [*1..10], [*1..8], "gif")
     generate_input_task_questions(level, 90, user)
   end
 end
