@@ -62,7 +62,8 @@
   <%= hidden_field_tag 'question_id', @question.id%>
   <div class="container">
     <div class="row justify-content-md-center">
-      <% random_options = (@question.q_type == "INPUT_DIAGRAMMATIC" && !@question.is_tlx) ? @question.options.shuffle : @question.options %>
+      <%  %>
+      <% random_options = (@question.q_type == "INPUT_DIAGRAMMATIC" && !@question.is_tlx) || (@question.q_type == "STENBERG" && !@question.is_tlx) ? @question.options.shuffle : @question.options %>
       <% random_options.each do |option| %>
         <% if @question.q_type == "STENBERG" && !@question.is_tlx %>
           <div class="col-sm-2 hide_questions hide">

@@ -1,7 +1,7 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: @current_user.username) do |sheet|
-sheet.add_row ['Question id', 'User Answer', 'Correct answer', 'Percentage value']
+sheet.add_row ['Question id', 'Question type', 'Level', 'User Answer', 'Correct answer', 'Percentage value']
   @current_user.answers.each do |answer|
-    sheet.add_row [answer.question_id, answer.answer, answer.check_correct_answer[0], answer.check_correct_answer[1]]
+    sheet.add_row [answer.question_id, answer.question_type, answer.question_difficulty_level, answer.answer, answer.check_correct_answer[0], answer.check_correct_answer[1]]
   end
 end

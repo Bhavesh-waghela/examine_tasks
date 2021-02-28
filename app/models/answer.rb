@@ -15,6 +15,18 @@ class Answer < ApplicationRecord
     return self.is_correct_ans, percent_val
   end
 
+  def question_type
+    self.question.q_type
+  end
+
+  def question_difficulty_level
+    if self.question.is_tlx
+      return "TLX"
+    else
+      return self.question.difficulty_level
+    end
+  end
+
   def set_default_answers correct_option
     if self.answer.present?
       if correct_option && correct_option.option == self.answer
